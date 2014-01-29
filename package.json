@@ -1,0 +1,40 @@
+{
+  "name": "bracket-finder",
+  "description": "Find an NCAA tournament bracket in a tweet.",
+  "version": "1.0.0",
+  "keywords": [
+    "ncaa",
+    "bracket",
+    "tweetyourbracket"
+  ],
+  "bugs": {
+    "url": "http://github.com/tweetyourbracket/bracket-finder/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Luke Karrys",
+    "email": "luke@lukekarrys.com",
+    "url": "http://lukekarrys.com"
+  },
+  "main": "index.js",
+  "homepage": "http://github.com/tweetyourbracket/bracket-finder",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/tweetyourbracket/bracket-finder.git"
+  },
+  "dependencies": {
+    "lodash-node": "~2.4.1",
+    "bracket-data": "~1.0.0",
+    "bracket-validator": "~1.0.0",
+    "simple-realurl": "~0.1.4",
+    "async": "~0.2.10"
+  },
+  "scripts": {
+    "test": "BRACKET_YEAR=2013 ./node_modules/.bin/mocha -c -u bdd -R spec --timeout 10000 test/*.js"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "assert": "~1.1.0",
+    "bracket-generator": "~1.0.0"
+  }
+}
