@@ -9,10 +9,11 @@ var APP_NAME = 'lukekarrys.com',
         year: year
     }),
     BracketGenerator = require('bracket-generator'),
-    bracket = new BracketGenerator({
+    generatedBracket = new BracketGenerator({
         year: year,
         winners: 'lower'
-    }).flatBracket(),
+    }),
+    bracket = generatedBracket.flatBracket(),
     assert = require('assert'),
 
     fullTweet = {
@@ -64,10 +65,31 @@ describe('Bracket Finder', function () {
         });
     });
 
+    it('should not return a bracket from a bad tweet', function (done) {
+        var testTweet = _cloneDeep(fullTweet);
+        bf.find({text: 'Test', entities: {urls: [], hashtags: []}}, function (err, res) {
+            assert.equal(null, res);
+            assert.equal(true, err instanceof Error);
+            assert.equal(err.message, 'No bracket in tweet');
+            done();
+        });
+    });
+
+    it('should not a validate bracket if bracket is incomplete', function (done) {
+        var testTweet = _cloneDeep(fullTweet);
+        bf.find({text: generatedBracket.constants.EMPTY, entities: {urls: [], hashtags: []}}, function (err, res) {
+            assert.equal(null, res);
+            assert.equal(true, err instanceof Error);
+            assert.equal(err.message, 'Bracket has unpicked matches');
+            done();
+        });
+    });
+
     it('should return a valid bracket from a shortened url', function (done) {
         var testTweet = _cloneDeep(fullTweet);
         testTweet.entities.urls.push({expanded_url: shortenedUrl});
         bf.find(testTweet, function (err, res) {
+            assert.equal(null, err);
             assert.equal(bracket, res);
             done();
         });
@@ -77,6 +99,8 @@ describe('Bracket Finder', function () {
         var testTweet = _cloneDeep(fullTweet);
         bf.find(testTweet, function (err, res) {
             assert.equal(null, res);
+            assert.equal(true, err instanceof Error);
+            assert.equal(err.message, 'No bracket in tweet');
             done();
         });
     });

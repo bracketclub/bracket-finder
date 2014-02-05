@@ -26,7 +26,7 @@ Finder.prototype = Object.create(BracketData.prototype, {
 });
 
 Finder.prototype.getAppUrls = function (url) {
-    return url.indexOf(this.domain) > -1;
+    return url.toLowerCase().indexOf(this.domain.toLowerCase()) > -1;
 };
 
 Finder.prototype.urlsToMatches = function (url) {
@@ -73,10 +73,11 @@ Finder.prototype.find = function (tweet, cb) {
                     urlMatches = _compact(_map(appUrls, self.urlsToMatches, self)),
                     bracket = self.findFrom(urlMatches);
 
-                _cb(null, bracket);
+                _cb(bracket ? null : new Error('No bracket in tweet'), bracket ? bracket : null);
             });
         }
     ], function (err, res) {
+        if (err) return cb(err, null);
         self.validate(res, cb);
     });
 
