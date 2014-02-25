@@ -173,6 +173,7 @@ describe('Bracket Finder', function () {
         testTweet.entities.urls.push({expanded_url: shortenedUrl});
         bff.tweet(testTweet, function (err, res) {
             if (typeof window === 'undefined') {
+                console.log(err);
                 assert.equal(null, err);
                 assert.equal(bracket, res);
                 done();

@@ -57,7 +57,7 @@ finder.tweet(tweet, function (err, bracket) {
 
 - `tweet(tweetObject, cb)`: tweetObject should in the format of a tweet from Twitter's API
 - `find(dataObject, cb)`: dataObject should have the following:
-```json
+```js
 {
     urls: ['http://tweetyourbracket.com/X'],
     tags: ['tybrkt']

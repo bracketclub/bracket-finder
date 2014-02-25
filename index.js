@@ -122,6 +122,7 @@ Finder.prototype.find = function (data, cb) {
             var otherUrls = _filter(_without(data.urls, appUrls), canGetUrl);
             async.concat(otherUrls, _bind(realurl.get, realurl), function (err, realUrls) {
                 if (err) return _cb(err, null);
+
                 var appUrls = _filter(realUrls, domainUrls),
                     urlMatches = _compact(_map(appUrls, bracketUrls)),
                     bracket = findBracket(urlMatches);
