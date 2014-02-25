@@ -1,3 +1,4 @@
+/* globals console */
 var APP_NAME = 'lukekarrys.com',
     APP_HASHTAGS = ['tybrkt'],
     _cloneDeep = require('lodash-node/modern/objects/cloneDeep'),

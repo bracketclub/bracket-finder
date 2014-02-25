@@ -19,7 +19,8 @@
   },
   "devDependencies": {
     "bracket-generator": "~1.0.0",
-    "mocha": "~1.17.1"
+    "mocha": "~1.17.1",
+    "precommit-hook": "~0.3.10"
   },
   "homepage": "http://github.com/tweetyourbracket/bracket-finder",
   "keywords": [
