@@ -1,12 +1,14 @@
 var APP_NAME = 'lukekarrys.com',
     APP_HASHTAGS = ['tybrkt'],
     _cloneDeep = require('lodash-node/modern/objects/cloneDeep'),
-    year = process.env.BRACKET_YEAR,
+    year = '2013',
+    sport = 'ncaa-mens-basketball',
     BracketFinder = require('../index'),
     bf = new BracketFinder({
         domain: APP_NAME,
-        hashtags: APP_HASHTAGS,
-        year: year
+        tags: APP_HASHTAGS,
+        year: year,
+        sport: sport
     }),
     BracketGenerator = require('bracket-generator'),
     generatedBracket = new BracketGenerator({
@@ -41,7 +43,7 @@ describe('Bracket Finder', function () {
     it('should return a valid bracket from the url', function (done) {
         var testTweet = _cloneDeep(fullTweet);
         testTweet.entities.urls.push(goodUrl);
-        bf.find(testTweet, function (err, res) {
+        bf.tweet(testTweet, function (err, res) {
             assert.equal(bracket, res);
             done();
         });
@@ -50,7 +52,7 @@ describe('Bracket Finder', function () {
     it('should return a valid bracket from the text', function (done) {
         var testTweet = _cloneDeep(fullTweet);
         testTweet.text = goodText;
-        bf.find(testTweet, function (err, res) {
+        bf.tweet(testTweet, function (err, res) {
             assert.equal(bracket, res);
             done();
         });
@@ -59,15 +61,91 @@ describe('Bracket Finder', function () {
     it('should return a valid bracket from the hashtags', function (done) {
         var testTweet = _cloneDeep(fullTweet);
         testTweet.entities.hashtags.push(goodHashtag);
-        bf.find(testTweet, function (err, res) {
+        bf.tweet(testTweet, function (err, res) {
             assert.equal(bracket, res);
             done();
         });
     });
 
+    it('should not return a bracket from a tweet that does not match tags', function (done) {
+        bf.tweet({text: 'Test', entities: {urls: [], hashtags: []}}, function (err, res) {
+            assert.equal(null, res);
+            assert.equal(true, err instanceof Error);
+            assert.equal(err.message, 'Data does not match tags');
+            done();
+        });
+    });
+
+    it('should not return a bracket from a tweet that does not match domain', function (done) {
+        var bracketFinder = new BracketFinder({
+            domain: APP_NAME,
+            tags: APP_HASHTAGS,
+            year: year,
+            sport: sport,
+            forceMatch: ['domain']
+        });
+
+        bracketFinder.tweet({text: 'Test', entities: {urls: [], hashtags: []}}, function (err, res) {
+            assert.equal(null, res);
+            assert.equal(true, err instanceof Error);
+            assert.equal(err.message, 'Data does not match domain');
+            done();
+        });
+    });
+
+    it('should not return a bracket from a tweet that does not match domain and tags when a tag is set', function (done) {
+        var bracketFinder = new BracketFinder({
+            domain: APP_NAME,
+            tags: APP_HASHTAGS,
+            year: year,
+            sport: sport,
+            forceMatch: ['domain', 'tags']
+        });
+
+        bracketFinder.tweet({text: 'Test', entities: {urls: [], hashtags: [{text: 'tybrkt'}]}}, function (err, res) {
+            assert.equal(null, res);
+            assert.equal(true, err instanceof Error);
+            assert.equal(err.message, 'Data does not match domain');
+            done();
+        });
+    });
+
+    it('should not return a bracket from a tweet that does not match domain and tags when a domain is set', function (done) {
+        var bracketFinder = new BracketFinder({
+            domain: APP_NAME,
+            tags: APP_HASHTAGS,
+            year: year,
+            sport: sport,
+            forceMatch: ['domain', 'tags']
+        });
+
+        bracketFinder.tweet({text: 'Test', entities: {urls: [goodUrl], hashtags: []}}, function (err, res) {
+            assert.equal(null, res);
+            assert.equal(true, err instanceof Error);
+            assert.equal(err.message, 'Data does not match tags');
+            done();
+        });
+    });
+
+    it('should not force domain or tags when option is an empty array', function (done) {
+        var bracketFinder = new BracketFinder({
+            domain: APP_NAME,
+            tags: APP_HASHTAGS,
+            year: year,
+            sport: sport,
+            forceMatch: null
+        });
+
+        bracketFinder.tweet({text: 'Test', entities: {urls: [], hashtags: []}}, function (err, res) {
+            assert.equal(null, res);
+            assert.equal(true, err instanceof Error);
+            assert.equal(err.message, 'No bracket in tweet');
+            done();
+        });
+    });
+
     it('should not return a bracket from a bad tweet', function (done) {
-        var testTweet = _cloneDeep(fullTweet);
-        bf.find({text: 'Test', entities: {urls: [], hashtags: []}}, function (err, res) {
+        bf.tweet({text: 'Test', entities: {urls: [], hashtags: [{text: 'tybrkt'}]}}, function (err, res) {
             assert.equal(null, res);
             assert.equal(true, err instanceof Error);
             assert.equal(err.message, 'No bracket in tweet');
@@ -76,8 +154,7 @@ describe('Bracket Finder', function () {
     });
 
     it('should not a validate bracket if bracket is incomplete', function (done) {
-        var testTweet = _cloneDeep(fullTweet);
-        bf.find({text: generatedBracket.constants.EMPTY, entities: {urls: [], hashtags: []}}, function (err, res) {
+        bf.tweet({text: generatedBracket.constants.EMPTY, entities: {urls: [], hashtags: [{text: 'tybrkt'}]}}, function (err, res) {
             assert.equal(null, res);
             assert.equal(true, err instanceof Error);
             assert.equal(err.message, 'Bracket has unpicked matches');
@@ -85,19 +162,32 @@ describe('Bracket Finder', function () {
         });
     });
 
-    it('should return a valid bracket from a shortened url', function (done) {
+    it('should return a valid bracket from a shortened url (unless in a browser)', function (done) {
+        var bff = new BracketFinder({
+            domain: APP_NAME,
+            tags: APP_HASHTAGS,
+            year: year,
+            sport: sport
+        });
         var testTweet = _cloneDeep(fullTweet);
         testTweet.entities.urls.push({expanded_url: shortenedUrl});
-        bf.find(testTweet, function (err, res) {
-            assert.equal(null, err);
-            assert.equal(bracket, res);
-            done();
+        bff.tweet(testTweet, function (err, res) {
+            if (typeof window === 'undefined') {
+                assert.equal(null, err);
+                assert.equal(bracket, res);
+                done();
+            } else {
+                assert.equal(null, res);
+                assert.equal(true, err instanceof Error);
+                assert.equal(err.message, 'No bracket in tweet');
+                done();
+            }
         });
     });
 
     it('should not return a bracket from a bad tweet', function (done) {
         var testTweet = _cloneDeep(fullTweet);
-        bf.find(testTweet, function (err, res) {
+        bf.tweet(testTweet, function (err, res) {
             assert.equal(null, res);
             assert.equal(true, err instanceof Error);
             assert.equal(err.message, 'No bracket in tweet');

@@ -8,6 +8,7 @@
     "white": true,
     "undef": true,
     "browser": false,
+    "unused": true,
     "node": false,
     "trailing": true,
     "indent": 4,
