@@ -1,6 +1,6 @@
 var APP_NAME = 'lukekarrys.com',
     APP_HASHTAGS = ['tybrkt'],
-    _cloneDeep = require('lodash-node/modern/objects/cloneDeep'),
+    _cloneDeep = function (obj) {return JSON.parse(JSON.stringify(obj)); },
     year = '2013',
     sport = 'ncaa-mens-basketball',
     BracketFinder = require('../index'),

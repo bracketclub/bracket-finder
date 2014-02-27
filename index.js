@@ -120,14 +120,14 @@ Finder.prototype.find = function (data, cb) {
             if (bracket) return _cb(null, bracket);
             // Last, check other urls to see if the are tweetyourbracket urls
             var otherUrls = _filter(_without(data.urls, appUrls), canGetUrl);
-            async.concat(otherUrls, _bind(realurl.get, realurl), function (err, realUrls) {
+            async.concat(otherUrls, _bind(realurl.get, realurl), function (err, longUrls) {
                 if (err) return _cb(err, null);
 
-                var appUrls = _filter(realUrls, domainUrls),
-                    urlMatches = _compact(_map(appUrls, bracketUrls)),
-                    bracket = findBracket(urlMatches);
+                var longAppUrls = _filter(longUrls, domainUrls),
+                    longUrlMatches = _compact(_map(longAppUrls, bracketUrls)),
+                    longBracket = findBracket(longUrlMatches);
 
-                _cb(bracket ? null : new Error('No bracket in tweet'), bracket ? bracket : null);
+                _cb(longBracket ? null : new Error('No bracket in tweet'), longBracket ? longBracket : null);
             });
         }
     ], function (err, res) {
