@@ -18,7 +18,7 @@ For [tweetyourbracket.com](http://tweetyourbracket.com), users enter by tweeting
 1. It will check whether any links are from `options.domain`
 2. If that fails, it will check whether any of the tags match a tag from `options.tags`
 
-If both of those fail, it will fire the callback with an error (unless `forceDomainOrTags` is `false`). After that it will look for a bracket in:
+If both of those fail, it will fire the callback with an error (unless `forceMatch` contains either `tags` or `domain`). After that it will look for a bracket in:
 
 1. Any of the urls that match the domain
 2. Any of the tags
