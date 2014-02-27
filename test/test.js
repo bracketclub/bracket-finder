@@ -11,12 +11,19 @@ var APP_NAME = 'lukekarrys.com',
         year: year,
         sport: sport
     }),
+    BracketData = require('bracket-data'),
+    emptyBracket = new BracketData({
+        year: year,
+        sport: sport,
+        props: ['constants']
+    }).constants.EMPTY,
     BracketGenerator = require('bracket-generator'),
     generatedBracket = new BracketGenerator({
         year: year,
+        sport: sport,
         winners: 'lower'
     }),
-    bracket = generatedBracket.flatBracket(),
+    bracket = generatedBracket.generate(),
     assert = require('assert'),
 
     fullTweet = {
@@ -155,7 +162,7 @@ describe('Bracket Finder', function () {
     });
 
     it('should not a validate bracket if bracket is incomplete', function (done) {
-        bf.tweet({text: generatedBracket.constants.EMPTY, entities: {urls: [], hashtags: [{text: 'tybrkt'}]}}, function (err, res) {
+        bf.tweet({text: emptyBracket, entities: {urls: [], hashtags: [{text: 'tybrkt'}]}}, function (err, res) {
             assert.equal(null, res);
             assert.equal(true, err instanceof Error);
             assert.equal(err.message, 'Bracket has unpicked matches');

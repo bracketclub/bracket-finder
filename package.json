@@ -18,7 +18,7 @@
     "simple-realurl": "~0.1.4"
   },
   "devDependencies": {
-    "bracket-generator": "~1.0.0",
+    "bracket-generator": "~2.0.1",
     "mocha": "~1.17.1",
     "precommit-hook": "~0.3.10"
   },
