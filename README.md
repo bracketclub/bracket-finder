@@ -1,13 +1,13 @@
 bracket-finder
 ==============
 
+Find a tournament bracket in a tweet (or any data object).
+
 [![NPM](https://nodei.co/npm/bracket-finder.png)](https://nodei.co/npm/bracket-finder/)
 
 [![Build Status](https://travis-ci.org/tweetyourbracket/bracket-finder.png?branch=master)](https://travis-ci.org/tweetyourbracket/bracket-finder)
 
 ![Testling CI badge](https://ci.testling.com/tweetyourbracket/bracket-finder.png)
-
-Find an NCAA tournament bracket in a tweet (or any data object).
 
 ## Why is this useful?
 
