@@ -11,16 +11,17 @@
     "url": "http://github.com/tweetyourbracket/bracket-finder/issues"
   },
   "dependencies": {
-    "async": "~0.2.10",
-    "bracket-data": "~2.0.3",
-    "bracket-validator": "~2.0.1",
-    "lodash-node": "~2.4.1",
-    "simple-realurl": "~0.1.5"
+    "async": "^0.9.0",
+    "bracket-data": "^2.1.0",
+    "bracket-validator": "^2.0.2",
+    "lodash": "^3.3.1",
+    "simple-realurl": "^1.0.1"
   },
   "devDependencies": {
-    "bracket-generator": "~2.0.1",
-    "mocha": "~1.17.1",
-    "precommit-hook": "~0.3.10"
+    "bracket-generator": "^2.0.2",
+    "jshint": "^2.6.0",
+    "mocha": "^1.21.5",
+    "precommit-hook": "^1.0.7"
   },
   "homepage": "http://github.com/tweetyourbracket/bracket-finder",
   "keywords": [
@@ -36,19 +37,5 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha -c -u bdd -R spec --timeout 10000 test/*.js"
-  },
-  "testling": {
-    "harness": "mocha-bdd",
-    "files": "test/*.js",
-    "browsers": [
-      "ie/6..latest",
-      "chrome/22..latest",
-      "firefox/16..latest",
-      "safari/latest",
-      "opera/11.0..latest",
-      "iphone/6",
-      "ipad/6",
-      "android-browser/latest"
-    ]
   }
 }

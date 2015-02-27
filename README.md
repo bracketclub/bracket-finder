@@ -7,8 +7,6 @@ Find a tournament bracket in a tweet (or any data object).
 
 [![Build Status](https://travis-ci.org/tweetyourbracket/bracket-finder.png?branch=master)](https://travis-ci.org/tweetyourbracket/bracket-finder)
 
-![Testling CI badge](https://ci.testling.com/tweetyourbracket/bracket-finder.png)
-
 ## Why is this useful?
 
 For [tweetyourbracket.com](http://tweetyourbracket.com), users enter by tweeting a link to their bracket. This module can parse a tweet and determine if it contains a valid bracket. It also has a lower level method `find` that can be used to find a tweet in a more generic data object.
