@@ -1,7 +1,7 @@
 {
   "name": "bracket-finder",
   "description": "Find a tournament bracket in a tweet (or any data object).",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "author": {
     "name": "Luke Karrys",
     "email": "luke@lukekarrys.com",
