@@ -3,7 +3,7 @@ var async = require('async');
 var parseUrl = require('url').parse;
 var realurl = require('simple-realurl');
 var BracketValidator = require('bracket-validator');
-var BracketData = require('bracket-data');
+var bracketData = require('bracket-data');
 var _map = require('lodash/collection/map');
 var _find = require('lodash/collection/find');
 var _defaults = require('lodash/object/defaults');
@@ -37,10 +37,9 @@ function Finder(options) {
     this.followCrossDomain = options.followCrossDomain;
 
     // Create regexes and validator for later use
-    var bracketRegex = new BracketData({
+    var bracketRegex = bracketData({
         sport: options.sport,
-        year: options.year,
-        props: ['regex']
+        year: options.year
     }).regex;
 
     var fullBracketRegex = new RegExp('^' + bracketRegex.source + '$');

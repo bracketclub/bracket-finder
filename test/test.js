@@ -10,11 +10,10 @@ var APP_NAME = 'lukekarrys.com',
         year: year,
         sport: sport
     }),
-    BracketData = require('bracket-data'),
-    emptyBracket = new BracketData({
+    bd = require('bracket-data'),
+    emptyBracket = new bd({
         year: year,
-        sport: sport,
-        props: ['constants']
+        sport: sport
     }).constants.EMPTY,
     BracketGenerator = require('bracket-generator'),
     generatedBracket = new BracketGenerator({
