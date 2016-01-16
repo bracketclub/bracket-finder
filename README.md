@@ -32,7 +32,7 @@ Make a new `bracket-finder` object with an options object (the year and sport op
 var BracketFinder = require('bracket-finder');
 var finder = new BracketFinder({
    year: '2013',
-   sport: 'ncaa-mens-basketball',
+   sport: 'ncaam',
    domain: 'tweetyourbracket.com',
    tags: ['tybrtk']
 });

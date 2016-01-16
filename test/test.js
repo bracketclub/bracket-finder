@@ -2,7 +2,7 @@ var APP_NAME = 'lukekarrys.com',
     APP_HASHTAGS = ['tybrkt'],
     _cloneDeep = function (obj) {return JSON.parse(JSON.stringify(obj)); },
     year = '2013',
-    sport = 'ncaa-mens-basketball',
+    sport = 'ncaam',
     BracketFinder = require('../index'),
     bf = new BracketFinder({
         domain: APP_NAME,
