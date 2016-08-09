@@ -4,17 +4,16 @@ var parseUrl = require('url').parse;
 var realurl = require('simple-realurl');
 var BracketValidator = require('bracket-validator');
 var bracketData = require('bracket-data');
-var _map = require('lodash/collection/map');
-var _find = require('lodash/collection/find');
-var _defaults = require('lodash/object/defaults');
-var _pluck = require('lodash/collection/pluck');
-var _filter = require('lodash/collection/filter');
-var _without = require('lodash/array/without');
-var _bind = require('lodash/function/bind');
-var _compact = require('lodash/array/compact');
-var _intersection = require('lodash/array/intersection');
-var _contains = require('lodash/collection/contains');
-var _partial = require('lodash/function/partial');
+var _map = require('lodash/map');
+var _find = require('lodash/find');
+var _defaults = require('lodash/defaults');
+var _filter = require('lodash/filter');
+var _without = require('lodash/without');
+var _bind = require('lodash/bind');
+var _compact = require('lodash/compact');
+var _intersection = require('lodash/intersection');
+var _includes = require('lodash/includes');
+var _partial = require('lodash/partial');
 
 var validate;
 var findBracket;
@@ -89,8 +88,8 @@ function Finder(options) {
 Finder.prototype.tweet = function (tweet, cb) {
     _defaults(tweet, {text: '', entities: {}});
     this.find({
-        urls: _pluck(tweet.entities.urls, 'expanded_url'),
-        tags: _pluck(tweet.entities.hashtags, 'text'),
+        urls: _map(tweet.entities.urls, 'expanded_url'),
+        tags: _map(tweet.entities.hashtags, 'text'),
         text: tweet.text.split(' ')
     }, cb);
 };
@@ -98,9 +97,9 @@ Finder.prototype.tweet = function (tweet, cb) {
 Finder.prototype.find = function (data, cb) {
     var appUrls = _filter(data.urls, domainUrls);
 
-    if (_contains(this.forceMatch, 'tags') && _intersection(this.tags, data.tags).length === 0) {
+    if (_includes(this.forceMatch, 'tags') && _intersection(this.tags, data.tags).length === 0) {
         return cb(new Error('Data does not match tags'));
-    } else if (_contains(this.forceMatch, 'domain') && appUrls.length === 0) {
+    } else if (_includes(this.forceMatch, 'domain') && appUrls.length === 0) {
         return cb(new Error('Data does not match domain'));
     }
 
