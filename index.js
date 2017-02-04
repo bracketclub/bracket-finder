@@ -103,7 +103,7 @@ Finder.prototype.find = function (data, cb) {
 
   async.waterfall([
     function (_cb) {
-      // Most common scenario will be a tweetyourbracket.com url with a hash on it
+      // Most common scenario will be a url with a hash on it
       // Then test for a valid hashtag
       // Also test for a chunk of text that looks good
       _cb(null, self.findBracket(urlMatches) || self.findBracket(dataTags) || self.findBracket(textChunks))

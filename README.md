@@ -9,7 +9,7 @@ Find a tournament bracket in a tweet (or any data object).
 
 ## Why is this useful?
 
-For [tweetyourbracket.com](http://tweetyourbracket.com), users enter by tweeting a link to their bracket. This module can parse a tweet and determine if it contains a valid bracket. It also has a lower level method `find` that can be used to find a tweet in a more generic data object.
+For [bracket.club](https://bracket.club), users enter by tweeting a link to their bracket. This module can parse a tweet and determine if it contains a valid bracket. It also has a lower level method `find` that can be used to find a tweet in a more generic data object.
 
 ## How does it determine if a bracket is found?
 
@@ -33,7 +33,7 @@ var BracketFinder = require('bracket-finder');
 var finder = new BracketFinder({
    year: '2013',
    sport: 'ncaam',
-   domain: 'tweetyourbracket.com',
+   domain: 'bracket.club',
    tags: ['tybrtk']
 });
 finder.tweet(tweet, function (err, bracket) {
@@ -57,7 +57,7 @@ finder.tweet(tweet, function (err, bracket) {
 - `find(dataObject, cb)`: dataObject should have the following:
 ```js
 {
-    urls: ['http://tweetyourbracket.com/X'],
+    urls: ['https://bracket.club/X'],
     tags: ['tybrkt']
     text: 'This is the text!'
 }
