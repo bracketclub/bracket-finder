@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 var APP_NAME = 'lukekarrys.com'
-var APP_HASHTAGS = ['tybrkt']
+var APP_HASHTAGS = ['sometaggg']
 var _cloneDeep = function (obj) { return JSON.parse(JSON.stringify(obj)) }
 var year = '2013'
 var sport = 'ncaam'
@@ -109,7 +109,7 @@ describe('Bracket Finder', function () {
       forceMatch: ['domain', 'tags']
     })
 
-    bracketFinder.tweet({text: 'Test', entities: {urls: [], hashtags: [{text: 'tybrkt'}]}}, function (err, res) {
+    bracketFinder.tweet({text: 'Test', entities: {urls: [], hashtags: [{text: 'sometaggg'}]}}, function (err, res) {
       assert.equal(null, res)
       assert.equal(true, err instanceof Error)
       assert.equal(err.message, 'Data does not match domain')
@@ -152,7 +152,7 @@ describe('Bracket Finder', function () {
   })
 
   it('should not return a bracket from a bad tweet', function (done) {
-    bf.tweet({text: 'Test', entities: {urls: [], hashtags: [{text: 'tybrkt'}]}}, function (err, res) {
+    bf.tweet({text: 'Test', entities: {urls: [], hashtags: [{text: 'sometaggg'}]}}, function (err, res) {
       assert.equal(null, res)
       assert.equal(true, err instanceof Error)
       assert.equal(err.message, 'No bracket in tweet')
@@ -161,7 +161,7 @@ describe('Bracket Finder', function () {
   })
 
   it('should not a validate bracket if bracket is incomplete', function (done) {
-    bf.tweet({text: emptyBracket, entities: {urls: [], hashtags: [{text: 'tybrkt'}]}}, function (err, res) {
+    bf.tweet({text: emptyBracket, entities: {urls: [], hashtags: [{text: 'sometaggg'}]}}, function (err, res) {
       assert.equal(null, res)
       assert.equal(true, err instanceof Error)
       assert.equal(err.message, 'Bracket has unpicked matches')

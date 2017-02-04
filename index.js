@@ -110,7 +110,7 @@ Finder.prototype.find = function (data, cb) {
     },
     function (bracket, _cb) {
       if (bracket) return _cb(null, bracket)
-      // Last, check other urls to see if the are tweetyourbracket urls
+      // Last, check other urls to see if the are matching urls
       var otherUrls = _filter(_without(data.urls, appUrls), self.canGetUrl)
       async.concat(otherUrls, _bind(realurl.get, realurl), function (err, longUrls) {
         if (err) return _cb(err, null)

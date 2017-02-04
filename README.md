@@ -5,7 +5,7 @@ Find a tournament bracket in a tweet (or any data object).
 
 [![NPM](https://nodei.co/npm/bracket-finder.png)](https://nodei.co/npm/bracket-finder/)
 
-[![Build Status](https://travis-ci.org/tweetyourbracket/bracket-finder.png?branch=master)](https://travis-ci.org/tweetyourbracket/bracket-finder)
+[![Build Status](https://travis-ci.org/bracketclub/bracket-finder.png?branch=master)](https://travis-ci.org/bracketclub/bracket-finder)
 
 ## Why is this useful?
 
@@ -22,11 +22,11 @@ If both of those fail, it will fire the callback with an error (unless `forceMat
 2. Any of the tags
 3. Any chunks of text (split by spaces)
 
-If any of these find a bracket, it will be [validated](https://github.com/tweetyourbracket/bracket-validator) the result will be passed to the callback. If no bracket is still found, any URLs will be followed using [simple-realurl](https://github.com/lukekarrys/simple-node-realurl) and checked again to see if they match the domain and contain a bracket.
+If any of these find a bracket, it will be [validated](https://github.com/bracketclub/bracket-validator) the result will be passed to the callback. If no bracket is still found, any URLs will be followed using [simple-realurl](https://github.com/lukekarrys/simple-node-realurl) and checked again to see if they match the domain and contain a bracket.
 
 ## API / Usage
 
-Make a new `bracket-finder` object with an options object (the year and sport options are required and passed directly to [`bracket-data`](https://github.com/tweetyourbracket/bracket-data#which-sports-does-it-have)):
+Make a new `bracket-finder` object with an options object (the year and sport options are required and passed directly to [`bracket-data`](https://github.com/bracketclub/bracket-data#which-sports-does-it-have)):
 
 ```js
 var BracketFinder = require('bracket-finder');
@@ -44,8 +44,8 @@ finder.tweet(tweet, function (err, bracket) {
 
 ### options
 
-- `sport`: The sport you are validating. See [`bracket-data`](https://github.com/tweetyourbracket/bracket-data#api) for more info.
-- `year`: The year you are validating. See [`bracket-data`](https://github.com/tweetyourbracket/bracket-data#api) for more info.
+- `sport`: The sport you are validating. See [`bracket-data`](https://github.com/bracketclub/bracket-data#api) for more info.
+- `year`: The year you are validating. See [`bracket-data`](https://github.com/bracketclub/bracket-data#api) for more info.
 - `domain`: (String, default: '') The domain that a bracket tweet or data object might contain
 - `tags`: (Array, default: []) An array of (hash)tags (but without the `#`) that a bracket tweet or data object might contain
 - `forceMatch`: (Array, default: ['tags']) Indicates which properties must be specified in the data. Can contain `tags`, `domain`, both or neither
@@ -58,7 +58,7 @@ finder.tweet(tweet, function (err, bracket) {
 ```js
 {
     urls: ['https://bracket.club/X'],
-    tags: ['tybrkt']
+    tags: ['bracketclub']
     text: 'This is the text!'
 }
 ```
