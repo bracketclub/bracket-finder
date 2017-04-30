@@ -4,8 +4,8 @@ bracket-finder
 Find a tournament bracket in a tweet (or any data object).
 
 [![NPM](https://nodei.co/npm/bracket-finder.png)](https://nodei.co/npm/bracket-finder/)
-
 [![Build Status](https://travis-ci.org/bracketclub/bracket-finder.png?branch=master)](https://travis-ci.org/bracketclub/bracket-finder)
+[![Greenkeeper badge](https://badges.greenkeeper.io/bracketclub/bracket-finder.svg)](https://greenkeeper.io/)
 
 ## Why is this useful?
 
