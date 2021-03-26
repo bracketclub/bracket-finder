@@ -20,8 +20,8 @@
   "devDependencies": {
     "bracket-generator": "^3.0.1",
     "git-validate": "^2.1.4",
-    "mocha": "^3.0.2",
-    "standard": "^8.0.0-beta.3"
+    "mocha": "^4.0.0",
+    "standard": "^10.0.2"
   },
   "homepage": "https://github.com/bracketclub/bracket-finder",
   "keywords": [
