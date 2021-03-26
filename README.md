@@ -3,9 +3,9 @@ bracket-finder
 
 Find a tournament bracket in a tweet (or any data object).
 
-[![NPM](https://nodei.co/npm/bracket-finder.png)](https://nodei.co/npm/bracket-finder/)
+**This is now part of the [data repo](https://github.com/bracketclub/data).**
 
-[![Build Status](https://travis-ci.org/bracketclub/bracket-finder.png?branch=master)](https://travis-ci.org/bracketclub/bracket-finder)
+[![NPM](https://nodei.co/npm/bracket-finder.png)](https://nodei.co/npm/bracket-finder/)
 
 ## Why is this useful?
 
